@@ -122,8 +122,13 @@ function Calculator() {
         (prev) => prev + event.target.getAttribute("data-for-display")
       );
     } else if (event.target.getAttribute("type") === "result") {
-      // eslint-disable-next-line
-      let calculateResult = new Function("return " + formula)();
+      let calculateResult = new Function("return " + formula);
+      console.log(calculateResult);
+      let temp = () => {
+        console.log(formula);
+        return formula;
+      };
+      console.log(temp);
       setOperand(calculateResult);
       setDisplayFormula(calculateResult);
       setFormula(calculateResult);
@@ -143,105 +148,106 @@ function Calculator() {
   useEffect(() => {
     onReset();
   }, [resetButtonState]);
-  /*
+
+  // map을 위한 배열
   const buttons = [
     {
       dataForCalculate: 7,
       dataForDisplay: 7,
       type: "operand",
-      onClick: { onClick },
+      onClick: onClick,
     },
     {
       dataForCalculate: 8,
       dataForDisplay: 8,
       type: "operand",
-      onClick: { onClick },
+      onClick: onClick,
     },
     {
       dataForCalculate: 9,
       dataForDisplay: 9,
       type: "operand",
-      onClick: { onClick },
+      onClick: onClick,
     },
     {
       dataForCalculate: "/",
       dataForDisplay: " ÷ ",
       type: "operator",
-      onClick: { onClick },
+      onClick: onClick,
     },
     {
       dataForCalculate: 4,
       dataForDisplay: 4,
       type: "operand",
-      onClick: { onClick },
+      onClick: onClick,
     },
     {
       dataForCalculate: 5,
       dataForDisplay: 5,
       type: "operand",
-      onClick: { onClick },
+      onClick: onClick,
     },
     {
       dataForCalculate: 6,
       dataForDisplay: 6,
       type: "operand",
-      onClick: { onClick },
+      onClick: onClick,
     },
     {
       dataForCalculate: "*",
       dataForDisplay: " x ",
       type: "operator",
-      onClick: { onClick },
+      onClick: onClick,
     },
     {
       dataForCalculate: 1,
       dataForDisplay: 1,
       type: "operand",
-      onClick: { onClick },
+      onClick: onClick,
     },
     {
       dataForCalculate: 2,
       dataForDisplay: 2,
       type: "operand",
-      onClick: { onClick },
+      onClick: onClick,
     },
     {
       dataForCalculate: 3,
       dataForDisplay: 3,
       type: "operand",
-      onClick: { onClick },
+      onClick: onClick,
     },
     {
       dataForCalculate: "-",
       dataForDisplay: " - ",
       type: "operator",
-      onClick: { onClick },
+      onClick: onClick,
     },
     {
       dataForCalculate: "c",
       dataForDisplay: "c",
       type: "clear",
-      onClick: { onClick },
+      onClick: onClick,
     },
     {
       dataForCalculate: 0,
       dataForDisplay: 0,
       type: "operand",
-      onClick: { onClick },
+      onClick: onClick,
     },
     {
       dataForCalculate: "+",
       dataForDisplay: " + ",
       type: "operator",
-      onClick: { onClick },
+      onClick: onClick,
     },
     {
       dataForCalculate: "=",
       dataForDisplay: " = ",
       type: "result",
-      onClick: { onClick },
+      onClick: onClick,
     },
-  ];*/
+  ];
 
   return (
     <CalculatorBox>
@@ -252,102 +258,14 @@ function Calculator() {
         </CalculatorResultBox>
       </CalculatorViewWrap>
       <ButtonWrap>
-        <Button
-          dataForCalculate={7}
-          dataForDisplay={7}
-          type={"operand"}
-          onClick={onClick}
-        />
-        <Button
-          dataForCalculate={8}
-          dataForDisplay={8}
-          type={"operand"}
-          onClick={onClick}
-        />
-        <Button
-          dataForCalculate={9}
-          dataForDisplay={9}
-          type={"operand"}
-          onClick={onClick}
-        />
-        <Button
-          dataForCalculate={"/"}
-          dataForDisplay={" ÷ "}
-          type={"operator"}
-          onClick={onClick}
-        />
-        <Button
-          dataForCalculate={4}
-          dataForDisplay={4}
-          type={"operand"}
-          onClick={onClick}
-        />
-        <Button
-          dataForCalculate={5}
-          dataForDisplay={5}
-          type={"operand"}
-          onClick={onClick}
-        />
-        <Button
-          dataForCalculate={6}
-          dataForDisplay={6}
-          type={"operand"}
-          onClick={onClick}
-        />
-        <Button
-          dataForCalculate={"*"}
-          dataForDisplay={" x "}
-          type={"operator"}
-          onClick={onClick}
-        />
-        <Button
-          dataForCalculate={1}
-          dataForDisplay={1}
-          type={"operand"}
-          onClick={onClick}
-        />
-        <Button
-          dataForCalculate={2}
-          dataForDisplay={2}
-          type={"operand"}
-          onClick={onClick}
-        />
-        <Button
-          dataForCalculate={3}
-          dataForDisplay={3}
-          type={"operand"}
-          onClick={onClick}
-        />
-        <Button
-          dataForCalculate={"-"}
-          dataForDisplay={" - "}
-          type={"operator"}
-          onClick={onClick}
-        />
-        <Button
-          dataForCalculate={"c"}
-          dataForDisplay={"c"}
-          type={"clear"}
-          onClick={onClick}
-        />
-        <Button
-          dataForCalculate={0}
-          dataForDisplay={0}
-          type={"operand"}
-          onClick={onClick}
-        />
-        <Button
-          dataForCalculate={"+"}
-          dataForDisplay={" + "}
-          type={"operator"}
-          onClick={onClick}
-        />
-        <Button
-          dataForCalculate={"="}
-          dataForDisplay={" = "}
-          type={"result"}
-          onClick={onClick}
-        />
+        {buttons.map((button) => (
+          <Button
+            dataForCalculate={button.dataForCalculate}
+            dataForDisplay={button.dataForDisplay}
+            type={button.type}
+            onClick={button.onClick}
+          />
+        ))}
       </ButtonWrap>
     </CalculatorBox>
   );
