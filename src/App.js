@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Calculator from "./component/Calculator";
 import InputSample from "./component/Input";
 import Problem from "./component/Problem";
 
@@ -17,6 +18,7 @@ function App() {
       </button>
       <InputSample />
       <Problem />
+      <Calculator></Calculator>
     </>
   );
 }
