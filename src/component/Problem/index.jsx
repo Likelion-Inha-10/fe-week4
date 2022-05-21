@@ -14,8 +14,13 @@ const Problem = () => {
   const [isClick, setIsClick] = useState(false);
 
   useEffect(() => {
-    setCount(count + 1);
+    setCount((prev) => prev + 1);
   }, [isClick]);
+  /*
+  기존 코드의 문제점: useEffect안에서 사용하는 것은 deps에 모두 넣어주어야 하는데, deps에 count가 없다. 
+                     이렇게 되면 useEffect 안의 함수가 실행될 때 최신 상태를 가리키지 않는다고 한다.
+  해결 방법: setCount의 return 값인 count을 prev라는 변수에 저장하고, arrow function을 통해 이 변수가 항상 새로운 상태를 받아들이도록 한다.
+  */
 
   return (
     <ProblemWrapper>
